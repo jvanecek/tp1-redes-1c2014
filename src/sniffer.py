@@ -3,7 +3,7 @@ import logging
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR) # para que no aparezcan warnings molestos
 
 from scapy.all import *
-
+from math import log
 from datetime import datetime
 
 def now():
@@ -56,6 +56,22 @@ class sniffer:
 			self.crudo += crudo + "\n"
 
 			return crudo
+
+	def total_pkts(self):
+		return sum( self.ipssrc.values() )
+
+	def ipssrc_info(self):
+		info = {}
+		N = sum( self.ipssrc.values() )
+		for ip in self.ipssrc:
+			info[ip] = - log( self.ipssrc[ip] / N )
+		return info
+
+	def ipssrc_entropia(self):
+		N = sum(self.ipssrc.values())
+		Ps = [ k/N for k in self.ipssrc.values() ]
+		H = -sum([ p*log(p,2) for p in Ps ])
+		return H
 
 	def dump_all(self, file_name):
 		with open(file_name, 'w') as f:
