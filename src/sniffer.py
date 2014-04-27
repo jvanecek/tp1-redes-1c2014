@@ -73,6 +73,19 @@ class sniffer:
 		H = -sum([ p*log(p,2) for p in Ps ])
 		return H
 
+	def ipsdst_info(self):
+		info = {}
+		N = sum( self.ipsdst.values() )
+		for ip in self.ipsdst:
+			info[ip] = - log( self.ipsdst[ip] / N )
+		return info
+
+	def ipsdst_entropia(self):
+		N = sum(self.ipsdst.values())
+		Ps = [ k/N for k in self.ipsdst.values() ]
+		H = -sum([ p*log(p,2) for p in Ps ])
+		return H
+
 	def dump_all(self, file_name):
 		with open(file_name, 'w') as f:
 			f.write(self.crudo)
