@@ -68,13 +68,31 @@
 
 \section{Introducción}
 
-Aprovechando las herramientas existentes para el an\'alisis de transferencia de paquetes, como Scapy y Wireshark, nos desarrollamos nuestra propia herramienta que nos permite captar paquetes de distintas redes inal\'ambricas a\'un cuando estos paquetes no estaban destinados a nuestro host. Para poder realizar esto, tuvimos que valernos de una modalidad de uso brindada por la placa de red.
-Asi, utilizando la placa de red en modo Promiscuo o Monitor, nos dispusimos a captar los paquetes correspondientes al protocolo ARP (Address Resolution Protocol), con el objetivo de realizar un an\'alisis sobre el intercambio de paquetes de este protocolo realizado en distintas redes, buscando identificar los nodos m\'as significativos e intentando comprender su rol dentro de la red.
+Aprovechando las herramientas existentes para el an\'alisis de transferencia de paquetes, como Scapy y Wireshark, nos desarrollamos nuestra propia herramienta que nos permite captar paquetes los paquetes de la redes local a donde estemos conectados. Para poder realizar esto, tuvimos que valernos de una modalidad de uso brindada por la placa de red.
+
+Asi, utilizando la placa de red en modo Promiscuo o Monitor, nos dispusimos a captar los paquetes correspondientes al protocolo ARP (Address Resolution Protocol), con el objetivo de realizar un an\'alisis sobre el intercambio de paquetes de este protocolo realizado en distintas redes, buscando identificar los nodos m\'as significativos e intentando comprender su rol dentro de la red. Este tipo de paquetes es adecuado para este an\'alisis ya que en redes de acceso m\'ultiple son el encargado de traducir direcciones de red (IP) en direcciones de enlace (MAC). Los hosts los env\'ian cuando quieren conocer la ubicaci\'on de cierta IP, y un router est\'a constantemente actualizando su tabla de routeo, por lo que podr\'iamos identificar a estos de acuerdo al flujo de ARPs que corren por la red. 
+
 Vali\'endonos de distintas herramientas de an\'alisis y graficaci\'on hemos realizado este trabajo, obteniendo los resultados y haciendo los an\'alisis presentados a continuaci\'on.
 
 \section{Desarrollo}
 
-En el primer punto nos piden que implementemos una herramienta para escuchar pasivamente una red local. Y para ello nos basamos en 
+En el primer punto nos piden que implementemos una herramienta para escuchar pasivamente una red local. Scapy nos provee una serie de m\'etodos como \texttt{sniff} que ejecuta un callback cada vez que la placa de red recibe un paquete. Luego la clase \texttt{Sniffer} se encarga de parsearlo si es un paquete ARP, y guardarlo convenientemente.  
+
+El paquete esta compuesto, entre otras cosas, por la direcci\'on IP y MAC origen y destino, y el tipo de consulta: \textit{who-has} o \textit{is-at}. 
+
+Como m\'etodo para identificar los routers en la red analizamos tres fuentes de informaci\'on en 5 redes diferentes (2 dom\'esticas, 2 empresariales, 1 p\'ublica). Las fuentes que usamos fueron: 
+
+\begin{enumerate}
+ \item {\it IP origen}; evento: IP {\it X} manda un paquete {\it who-has}.
+ \item {\it IP destino}; evento: IP {\it X} recibe un paquete {\it who-has}.
+ \item {\it IP origen - IP destino}; evento: IP {\it X} manda un paquete who-has a {\it y}.
+\end{enumerate}
+
+Para cada una de estas fuentes, la clase \texttt{Sniffer} contiene un diccionario para almacenar cada eventos. 
+
+Una vez que ya tenemos la estructura armada, pusimos a correr el programa unos 30 minutos en cada LAN, un tiempo que consideramos prudente para poder tomar conclusiones. 
+
+Como queremos encontrar los puntos distinguidos en la red, nosotros los vamos a considerar a partir de los eventos que poseamos menos informaci\'on o, lo que es lo mismo, que tengan una mayor probabilidad de que suceda. En particular, nos interesan los eventos $s$ que cumplan $I(s) - H(S) < 0$. 
 
 \section{Gráficos y análisis}
 
@@ -88,17 +106,17 @@ En el primer punto nos piden que implementemos una herramienta para escuchar pas
 \ponerGrafico{graficos/casa_santi_entropia_rcv.png}{Fuente de informaci\'on: IPs que reciben}{0.5}{label}
 \ponerGrafico{graficos/casa_santi_grafo.png}{Red WiFi casa dom\'estica 2}{0.5}{label}
 
-\subsection{Red Ethernet Empresa 1}
+\subsection{Red Ethernet Empresa 1 (Recursiva)}
 \ponerGrafico{graficos/recursiva_entropia.png}{Fuente de informaci\'on: IPs que env\'ian}{0.5}{label}
 \ponerGrafico{graficos/recursiva_entropia_rcv.png}{Fuente de informaci\'on: IPs que reciben}{0.5}{label}
 \ponerGrafico{graficos/recursiva_grafo.png}{Red Ethernet de Recursiva}{0.5}{label}
 
-\subsection{Red Ethernet Empresa 2}
+\subsection{Red Ethernet Empresa 2 (ORSNA)}
 \ponerGrafico{graficos/orsna_entropia.png}{Fuente de informaci\'on: IPs que env\'ian}{0.5}{label}
 \ponerGrafico{graficos/orsna_entropia_rcv.png}{Fuente de informaci\'on: IPs que reciben}{0.5}{label}
 \ponerGrafico{graficos/orsna_grafo.png}{Red Ethernet de ORSNA}{0.5}{label}
 
-\subsection{Red WiFi local comercial}
+\subsection{Red WiFi local comercial (McDonalds)}
 \ponerGrafico{graficos/mcdonalds_entropia.png}{Fuente de informaci\'on: IPs que env\'ian}{0.5}{label}
 \ponerGrafico{graficos/mcdonalds_entropia_rcv.png}{Fuente de informaci\'on: IPs que reciben}{0.5}{label}
 \ponerGrafico{graficos/mcdonalds_grafo.png}{Red WiFi de McDonalds}{0.5}{label}
