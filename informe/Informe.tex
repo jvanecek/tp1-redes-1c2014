@@ -12,7 +12,6 @@
 \usepackage[all]{xy}
 \usepackage{multicol}
 \usepackage{subfig}
-
 \usepackage{cancel}
 \usepackage{float}
 \usepackage{xcolor}
@@ -34,9 +33,9 @@
 %uso: \ponerGrafico{file}{caption}{scale}{label}
 \newcommand{\ponerGrafico}[4]
 {\begin{figure}[H]
-	\centering
-	\subfloat{\includegraphics[scale=#3]{#1}}
-	\caption{#2} \label{fig:#4}
+  \centering
+  \subfloat{\hspace{-3.5cm}\includegraphics[scale=#3]{#1}}
+  \caption{#2} \label{fig:#4}
 \end{figure}
 }
 
@@ -75,10 +74,34 @@ Valiendonos de distintas herramientas de an\'alisis y graficaci\'on hemos realiz
 
 \section{Desarrollo}
 
-
+En el primer punto nos piden que implementemos una herramienta para escuchar pasivamente una red local. Y para ello nos basamos en 
 
 \section{Gráficos y análisis}
 
+\subsection{Red WiFi casa particular 1}
+\ponerGrafico{graficos/casa_juan_entropia.png}{Fuente de informaci\'on: IPs que env\'ian}{0.5}{label}
+\ponerGrafico{graficos/casa_juan_entropia_rcv.png}{Fuente de informaci\'on: IPs que reciben}{0.5}{label}
+\ponerGrafico{graficos/casa_juan_grafo.png}{Red WiFi casa dom\'estica 1}{0.6}{label}
+
+\subsection{Red WiFi casa particular 2}
+\ponerGrafico{graficos/casa_santi_entropia.png}{Fuente de informaci\'on: IPs que env\'ian}{0.5}{label}
+\ponerGrafico{graficos/casa_santi_entropia_rcv.png}{Fuente de informaci\'on: IPs que reciben}{0.5}{label}
+\ponerGrafico{graficos/casa_santi_grafo.png}{Red WiFi casa dom\'estica 2}{0.5}{label}
+
+\subsection{Red Ethernet Empresa 1}
+\ponerGrafico{graficos/recursiva_entropia.png}{Fuente de informaci\'on: IPs que env\'ian}{0.5}{label}
+\ponerGrafico{graficos/recursiva_entropia_rcv.png}{Fuente de informaci\'on: IPs que reciben}{0.5}{label}
+\ponerGrafico{graficos/recursiva_grafo.png}{Red Ethernet de Recursiva}{0.5}{label}
+
+\subsection{Red Ethernet Empresa 2}
+\ponerGrafico{graficos/orsna_entropia.png}{Fuente de informaci\'on: IPs que env\'ian}{0.5}{label}
+\ponerGrafico{graficos/orsna_entropia_rcv.png}{Fuente de informaci\'on: IPs que reciben}{0.5}{label}
+\ponerGrafico{graficos/orsna_grafo.png}{Red Ethernet de ORSNA}{0.5}{label}
+
+\subsection{Red WiFi local comercial}
+\ponerGrafico{graficos/mcdonalds_entropia.png}{Fuente de informaci\'on: IPs que env\'ian}{0.5}{label}
+\ponerGrafico{graficos/mcdonalds_entropia_rcv.png}{Fuente de informaci\'on: IPs que reciben}{0.5}{label}
+\ponerGrafico{graficos/mcdonalds_grafo.png}{Red WiFi de McDonalds}{0.5}{label}
 \section{Conclusiones}
 
 \end{document}
