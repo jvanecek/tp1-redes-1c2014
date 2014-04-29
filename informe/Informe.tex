@@ -98,7 +98,7 @@ Como queremos encontrar los puntos distinguidos en la red, los vamos a considera
 
 Para las distintas redes utilizadas, presentamos los datos obtenidos a trav\'es de distintos gr\'aficos, uno para cada fuente de informaci\'on considerada, que nos permiten, no solo mostrar mas claramente los resultados obtenidos, sino que tambi\'en son \'utiles para realizar el an\'alisis de las distintas redes y compararlas entre s\'i.
 
-Consideramos de utilidad, para analizar las fuentes de informaci\'on 1 y 2 presentadas en el desarrollo, representar la actividad mostrada por cada nodo dentro de una red graficando la cantidad de informaci\'on  proporcionada por el evento relacionado a este. Adem\'as decidimos mostrar una l\'inea color rojo que representa la Entrop\'ia de la red. El echo de que la informaci\'on brindada por un nodo se encuentre debajo de la linea roja, nos indica que ese nodo tiene una actividad significativa dentro de la red y nos dice que dicho nodo es de importancia a la hora de realizar el an\'alisis.
+Consideramos de utilidad, para analizar las fuentes de informaci\'on 1 y 2 presentadas en el desarrollo, representar la actividad mostrada por cada nodo dentro de una red graficando la cantidad de informaci\'on  proporcionada por el evento relacionado a este. Adem\'as decidimos mostrar una l\'inea color rojo que representa la Entrop\'ia de la fuente. El echo de que la informaci\'on brindada por un nodo se encuentre debajo de la linea roja, nos indica que ese nodo tiene una actividad significativa dentro de la red y nos dice que dicho nodo es de importancia a la hora de realizar el an\'alisis.
 
 Por otro lado, para el analisis de la fuente de informaci\'on 3, presentamos un grafo, con nodos de distintos tamaños, donde los nodos representan una IP y los ejes un un paquete que lo referencia como destino o fuente seg\'un la direcci\'on. El tamaño de los nodos representa la cantidad de intercambios en los que particip\'o, viendose as\'i, los nodos mas significativos graficados con mayor tamaño y siendo facilmente identificables.
 
@@ -107,13 +107,18 @@ Por otro lado, para el analisis de la fuente de informaci\'on 3, presentamos un 
 
 \ponerGrafico{graficos/casa_juan_entropia.png}{Fuente de informaci\'on: IPs que env\'ian}{0.5}{label}
 \ponerGrafico{graficos/casa_juan_entropia_rcv.png}{Fuente de informaci\'on: IPs que reciben}{0.5}{label}
+<<<<<<< HEAD
 
 Los gr\'aficos presentados anteriormente pertenecen a una red dom\'estica. Podemos observar que uno de los nodos de la red representa una cantidad de unidades de informaci\'on notablemente menor a la de los dem\'as.
 Siendo que la funci\'on que determina las unidades de informaci\'on para cada evento, es decreciente, mientras m\'as veces haya ocurrido este evento en el peri\'odo de tiempo que se tom\'o la muestra, menor ser\'a la cantidad de informaci\'on que representa el hecho que ese evento ocurra. As\'i, vemos que el evento cuya informaci\'on se destaca por ser notablemente menor a los dem\'as, es el que m\'as intercambio de paquetes ha realizado. Tentados a pensar que \'este deber\'ia ser el nodo de la red que representa al Router, pudimos comprobarlo en la configuraci\'on de la red. Otro indicio f\'acil de notar hab\'ia sido la direcci\'on IP asociada a este nodo (192.168.0.1)
+=======
+Los gr\'aficos presentados anteriormente pertenecen a una casa particular. Podemos observar que uno de los nodos de la red representa una cantidad de unidades de informaci\'on notablemente menor a la de los dem\'as.
+Siendo que la funci\'on que determina las unidades de informaci\'on para cada evento, es decreciente, mientras m\'as veces haya ocurrido este evento en el peri\'odo de tiempo que se tom\'o la muestra, menor ser\'a la cantidad de informaci\'on que representa el hecho que ese evento ocurra. As\'i, vemos que el evento cuya informaci\'on se destaca por ser notablemente menor a los dem\'as, es el que m\'as intercambio de paquetes ha realizado. Tentados a pensar que \'este deber\'ia ser el nodo de la red que representa al Router, pudimos comprobarlo en la configuraci\'on de la red. Otro indicio f\'acil de notar hab\'ia sido la direcci\'on IP asociada a este nodo: 192.168.0.1
+>>>>>>> ca62944151b53781379a691d4d118fdec52d6fc4
 
 \ponerGrafico{graficos/casa_juan_grafo.png}{Red WiFi casa dom\'estica 1}{0.6}{label}
 
-En este gr\'afico, podemos identificar claramente a un nodo con gran actividad dentro de la red, coherentemente con los gr\'aficos anteriores, es nuevamente en este gr\'afico el nodo (192.168.0.1) es el de mayor actividad dentro de la red, correspondi\'endose esta direcci\'on con la del Router.
+En este gr\'afico, podemos identificar claramente a un nodo con gran actividad dentro de la red, coherentemente con los gr\'aficos anteriores, es nuevamente en este gr\'afico el nodo 192.168.0.1 el de mayor actividad dentro de la red, correspondi\'endose esta direcci\'on con la del Router.
 
 \subsection{Red WiFi casa particular 2}
 \ponerGrafico{graficos/casa_santi_entropia.png}{Fuente de informaci\'on: IPs que env\'ian}{0.5}{label}
