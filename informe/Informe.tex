@@ -107,14 +107,11 @@ Por otro lado, para el analisis de la fuente de informaci\'on 3, presentamos un 
 
 \ponerGrafico{graficos/casa_juan_entropia.png}{Fuente de informaci\'on: IPs que env\'ian}{0.5}{label}
 \ponerGrafico{graficos/casa_juan_entropia_rcv.png}{Fuente de informaci\'on: IPs que reciben}{0.5}{label}
-<<<<<<< HEAD
 
 Los gr\'aficos presentados anteriormente pertenecen a una red dom\'estica. Podemos observar que uno de los nodos de la red representa una cantidad de unidades de informaci\'on notablemente menor a la de los dem\'as.
+
 Siendo que la funci\'on que determina las unidades de informaci\'on para cada evento, es decreciente, mientras m\'as veces haya ocurrido este evento en el peri\'odo de tiempo que se tom\'o la muestra, menor ser\'a la cantidad de informaci\'on que representa el hecho que ese evento ocurra. As\'i, vemos que el evento cuya informaci\'on se destaca por ser notablemente menor a los dem\'as, es el que m\'as intercambio de paquetes ha realizado. Tentados a pensar que \'este deber\'ia ser el nodo de la red que representa al Router, pudimos comprobarlo en la configuraci\'on de la red. Otro indicio f\'acil de notar hab\'ia sido la direcci\'on IP asociada a este nodo (192.168.0.1)
-=======
-Los gr\'aficos presentados anteriormente pertenecen a una casa particular. Podemos observar que uno de los nodos de la red representa una cantidad de unidades de informaci\'on notablemente menor a la de los dem\'as.
-Siendo que la funci\'on que determina las unidades de informaci\'on para cada evento, es decreciente, mientras m\'as veces haya ocurrido este evento en el peri\'odo de tiempo que se tom\'o la muestra, menor ser\'a la cantidad de informaci\'on que representa el hecho que ese evento ocurra. As\'i, vemos que el evento cuya informaci\'on se destaca por ser notablemente menor a los dem\'as, es el que m\'as intercambio de paquetes ha realizado. Tentados a pensar que \'este deber\'ia ser el nodo de la red que representa al Router, pudimos comprobarlo en la configuraci\'on de la red. Otro indicio f\'acil de notar hab\'ia sido la direcci\'on IP asociada a este nodo: 192.168.0.1
->>>>>>> ca62944151b53781379a691d4d118fdec52d6fc4
+
 
 \ponerGrafico{graficos/casa_juan_grafo.png}{Red WiFi casa dom\'estica 1}{0.6}{label}
 
@@ -170,5 +167,6 @@ Pudimos ver, que si bien el Router participa en una cantidad importante de los p
 Sin lugar a dudas, la gran variedad de redes, las distintas formas de configurarlas y la diversidad de Hosts que podemos encontrarnos, nos muestran que no existe una regla que nos diga, que rol cumple cada nodo. En las casas particulares y lugares p\'ublicos es efectivo usar la fuente de informaci\'on que usa el evento de ip origen, porque hay un solo gateway y los dem\'as hosts son en general terminales de usuarios normales como pc, notebooks o celulares que no interfieren en el an\'alisis. A diferencia de una red en un lugar de trabajo, donde podemos encontrar distintos routers, y terminales de administradores que pueden estar haciendo mantenimiento o su propio estudio de la red, generando tr\'afico ARP para encontrar hosts ca\'idos, por ejemplo, y que influye en los resultados finales, como ya vimos. 
 
 A pesar de esto, lo que si podemos encontrar es una generalidad, y ver que nuestra hip\'otesis primigenia de que el Router sea quien m\'as utiliza el protocolo ARP es acertada, y en la mayor\'ia de los escenarios es efectivo.
+
 
 \end{document}
