@@ -68,19 +68,19 @@
 
 \section{Introducción}
 
-Aprovechando las herramientas existentes para el an\'alisis de transferencia de paquetes, como Scapy y Wireshark, nos desarrollamos nuestra propia herramienta que nos permite captar paquetes los paquetes de la redes local a donde estemos conectados. Para poder realizar esto, tuvimos que valernos de una modalidad de uso brindada por la placa de red.
+Aprovechando las herramientas existentes para el an\'alisis de transferencia de paquetes, como Scapy y Wireshark, nos desarrollamos nuestra propia herramienta que nos permite captar los paquetes de la redes local a donde estemos conectados. Para poder realizar esto, tuvimos que valernos de una modalidad de uso brindada por la placa de red.
 
-Asi, utilizando la placa de red en modo Promiscuo o Monitor, nos dispusimos a captar los paquetes correspondientes al protocolo ARP (Address Resolution Protocol), con el objetivo de realizar un an\'alisis sobre el intercambio de paquetes de este protocolo realizado en distintas redes, buscando identificar los nodos m\'as significativos e intentando comprender su rol dentro de la red. Este tipo de paquetes es adecuado para este an\'alisis ya que en redes de acceso m\'ultiple son el encargado de traducir direcciones de red (IP) en direcciones de enlace (MAC). Los hosts los env\'ian cuando quieren conocer la ubicaci\'on de cierta IP, y un router est\'a constantemente actualizando su tabla de routeo, por lo que podr\'iamos identificar a estos de acuerdo al flujo de ARPs que corren por la red. 
+As\'i, utilizando la placa de red en modo Promiscuo o Monitor, nos dispusimos a captar los paquetes correspondientes al protocolo ARP (Address Resolution Protocol), con el objetivo de realizar un an\'alisis sobre el intercambio de paquetes de este protocolo realizado en distintas redes, buscando identificar los nodos m\'as significativos e intentando comprender su rol dentro de la red. Este tipo de paquetes es adecuado para este an\'alisis ya que en redes de acceso m\'ultiple es el encargado de traducir direcciones de red (IP) en direcciones de enlace (MAC). Los hosts los env\'ian cuando quieren conocer la ubicaci\'on de cierta IP, y un router est\'a constantemente actualizando su tabla de routeo, por lo que podr\'iamos identificar a \'estos de acuerdo al flujo de ARPs que corren por la red. 
 
-Vali\'endonos de distintas herramientas de an\'alisis y graficaci\'on hemos realizado este trabajo, obteniendo los resultados y haciendo los an\'alisis presentados a continuaci\'on.
+Vali\'endonos de distintas herramientas de an\'alisis y graficaci\'on hemos realizado este trabajo, obteniendo los resultados presentados a continuaci\'on.
 
 \section{Desarrollo}
 
-En el primer punto nos piden que implementemos una herramienta para escuchar pasivamente una red local. Scapy nos provee una serie de m\'etodos como \texttt{sniff} que ejecuta un callback cada vez que la placa de red recibe un paquete. Luego la clase \texttt{Sniffer} se encarga de parsearlo si es un paquete ARP, y guardarlo convenientemente.  
+En el primer punto se pide implementar una herramienta para escuchar pasivamente una red local. Scapy nos provee una serie de m\'etodos como \texttt{sniff} que ejecuta un callback cada vez que la placa de red recibe un paquete. Luego la clase \texttt{Sniffer} se encarga de parsearlo si es un paquete ARP, y guardarlo convenientemente.  
 
-El paquete esta compuesto, entre otras cosas, por la direcci\'on IP y MAC origen y destino, y el tipo de consulta: \textit{who-has} o \textit{is-at}. 
+El paquete est\'a compuesto, entre otras cosas, por la direcci\'on IP y MAC origen y destino, y el tipo de consulta: \textit{who-has} o \textit{is-at}. 
 
-Como m\'etodo para identificar los routers en la red analizamos tres fuentes de informaci\'on en 5 redes diferentes (2 dom\'esticas, 2 empresariales, 1 p\'ublica). Las fuentes que usamos fueron: 
+Como m\'etodo para identificar los routers en la red analizamos tres fuentes de informaci\'on en 5 redes diferentes (dos dom\'esticas, una empresarial, una de un organismo, y una p\'ublica). Las fuentes que usamos fueron: 
 
 \begin{enumerate}
  \item {\it IP origen}; evento: IP {\it X} manda un paquete {\it who-has}.
@@ -92,33 +92,33 @@ Para cada una de estas fuentes, la clase \texttt{Sniffer} contiene un diccionari
 
 Una vez que ya tenemos la estructura armada, pusimos a correr el programa unos 30 minutos en cada LAN, un tiempo que consideramos prudente para poder tomar conclusiones. 
 
-Como queremos encontrar los puntos distinguidos en la red, nosotros los vamos a considerar a partir de los eventos que posean menos informaci\'on o, lo que es lo mismo, que tengan una mayor probabilidad de que suceda. En particular, nos interesan los eventos $s$ que cumplan $I(s) - H(S) < 0$. 
+Como queremos encontrar los puntos distinguidos en la red, los vamos a considerar a partir de los eventos que posean menos informaci\'on o, lo que es lo mismo, que tengan una mayor probabilidad de que suceda. En particular, nos interesan los eventos $s$ que cumplan $I(s) - H(S) < 0$. 
 
 \section{Gráficos y análisis}
 
-Para las distintas redes utilizadas, presentamos los datos obtenidos a traves de distintos gr\'aficos, uno para cada fuente de informaci\'on considerada, que nos permiten, no solo mostrar mas claramente los resultados obtenidos, sino que tambi\'en son \'utiles para realizar el analisis de las distintas redes y compararlas entre si.
+Para las distintas redes utilizadas, presentamos los datos obtenidos a trav\'es de distintos gr\'aficos, uno para cada fuente de informaci\'on considerada, que nos permiten, no solo mostrar mas claramente los resultados obtenidos, sino que tambi\'en son \'utiles para realizar el an\'alisis de las distintas redes y compararlas entre s\'i.
 
-Consideramos de utilidad, para analizar las fuentes de informaci\'on 1y 2 presentadas en el desarrollo, representar la actividad mostrada por cada nodo dentro de una red graficando la cantidad de informaci\'on  proporcionada por el evento relacionado a este. Adem\'as decidimos mostrar una linea color rojo que representa la Entropia de la red. El echo de que la informaci\'on brindada por un nodo se encuentre debajo de la linea roja, nos indica que ese nodo tiene una actividad significativa dentro de la red y nos dice que dicho nodo es de importancia a la hora de realizar el analisis.
+Consideramos de utilidad, para analizar las fuentes de informaci\'on 1 y 2 presentadas en el desarrollo, representar la actividad mostrada por cada nodo dentro de una red graficando la cantidad de informaci\'on  proporcionada por el evento relacionado a este. Adem\'as decidimos mostrar una l\'inea color rojo que representa la Entrop\'ia de la red. El echo de que la informaci\'on brindada por un nodo se encuentre debajo de la linea roja, nos indica que ese nodo tiene una actividad significativa dentro de la red y nos dice que dicho nodo es de importancia a la hora de realizar el an\'alisis.
 
-Por otro lado, para el analisis de la fuente de informaci\'on 3, presentamos un grafo, con nodos de distintos tamaños, donde los nodos representan una IP y los ejes un un paquete que lo referencia como destino o fuente segun la direcci\'on. El tamaño de los nodos representa la cantidad de intercambios en los que participo, viendose asi, los nodos mas significativos graficados con mayor tamaño y siendo facilmente identificables.
+Por otro lado, para el analisis de la fuente de informaci\'on 3, presentamos un grafo, con nodos de distintos tamaños, donde los nodos representan una IP y los ejes un un paquete que lo referencia como destino o fuente seg\'un la direcci\'on. El tamaño de los nodos representa la cantidad de intercambios en los que particip\'o, viendose as\'i, los nodos mas significativos graficados con mayor tamaño y siendo facilmente identificables.
 
 
 \subsection{Red WiFi casa particular 1}
 \ponerGrafico{graficos/casa_juan_entropia.png}{Fuente de informaci\'on: IPs que env\'ian}{0.5}{label}
 \ponerGrafico{graficos/casa_juan_entropia_rcv.png}{Fuente de informaci\'on: IPs que reciben}{0.5}{label}
 Los gr\'aficos presentados anteriormente pertenecen a una casa particular. Podemos observar que uno de los nodos de la red representa una cantidad de unidades de informaci\'on notablemente menor a la de los dem\'as.
-Siendo que la funci\'on que determina las unidades de informaci\'on para cada evento, es decreciente, mientras mas veces haya ocurrido este evento en el peri\'odo de tiempo que se tom\'o la muestra, menor ser\'a la cantidad de informaci\'on que representa el echo que ese evento ocurra. Asi, vemos que el evento cuya informaci\'on se destaca por ser notablemente menor a los demas, es el que m\'as intercambio de paquetes ha realizado. Tentados a pensar que este deberia ser el nodo de la red que representa al Router, pudimos comprobarlo en la configuraci\'on de la red. Otro indicio f\'acil de notar habia sido la direcci\'on IP asociada a este nodo (192.168.0.1)
+Siendo que la funci\'on que determina las unidades de informaci\'on para cada evento, es decreciente, mientras m\'as veces haya ocurrido este evento en el peri\'odo de tiempo que se tom\'o la muestra, menor ser\'a la cantidad de informaci\'on que representa el hecho que ese evento ocurra. As\'i, vemos que el evento cuya informaci\'on se destaca por ser notablemente menor a los dem\'as, es el que m\'as intercambio de paquetes ha realizado. Tentados a pensar que \'este deber\'ia ser el nodo de la red que representa al Router, pudimos comprobarlo en la configuraci\'on de la red. Otro indicio f\'acil de notar hab\'ia sido la direcci\'on IP asociada a este nodo (192.168.0.1)
 
 \ponerGrafico{graficos/casa_juan_grafo.png}{Red WiFi casa dom\'estica 1}{0.6}{label}
 
-En este gr\'afico, podemos identificar claramente a un nodo con gran actividad dentro de la red, coherentemente con los gr\'aficos anteriores, es nuevamente en este gr\'afico el nodo (192.168.0.1) es el de mayor actividad dentro de la red, correspondiendose esta direccion con la del Router.
+En este gr\'afico, podemos identificar claramente a un nodo con gran actividad dentro de la red, coherentemente con los gr\'aficos anteriores, es nuevamente en este gr\'afico el nodo (192.168.0.1) es el de mayor actividad dentro de la red, correspondi\'endose esta direcci\'on con la del Router.
 
 \subsection{Red WiFi casa particular 2}
 \ponerGrafico{graficos/casa_santi_entropia.png}{Fuente de informaci\'on: IPs que env\'ian}{0.5}{label}
 \ponerGrafico{graficos/casa_santi_entropia_rcv.png}{Fuente de informaci\'on: IPs que reciben}{0.5}{label}
 
-Estos gr\'aficos se corresponden con otra red de una casa. Sin embargo, nos da la posibilidad algunos resultados que no estabamos esperando.
-En el primer gr\'afico nos encontramos con un evento distinguido, el cual se corresponde con la IP  192.168.0.27, sin embargo, si miramos el segundo gr\'afico el evento distinguido se corresponde con otra direccion IP, la 192.168.0.1. esto nos p'lantea un interrogante sobre cual se corresponde al Router, nuestros conocimientos previos nos llevan a pensar que la segunda direccion se corresponde con el Router, y nos encargamos de chequearlo. La duda paso a ser, a que host pertenecia la otra IP. Nos encontramos con que esta IP se corresponde al Servidor Web, Apache, utilizado localmente.
+Estos gr\'aficos se corresponden con otra red de una casa. Sin embargo, nos devuelve algunos resultados que no est\'abamos esperando.
+En el primer gr\'afico nos encontramos con un evento distinguido, el cual se corresponde con la IP  192.168.0.27, sin embargo, si miramos el segundo gr\'afico el evento distinguido se corresponde con otra direcci\'on IP, la 192.168.0.1. Esto nos plantea un interrogante sobre cu\'al se corresponde al Router. Nuestros conocimientos previos nos llevan a pensar que la segunda direcci\'on se corresponde con el Router, y nos encargamos de chequearlo. La duda paso a ser, a qu\'e host pertenec\'ia la otra IP. Nos encontramos con que esta IP se corresponde al Servidor Web, Apache, utilizado localmente.
 
 \ponerGrafico{graficos/casa_santi_grafo.png}{Red WiFi casa dom\'estica 2}{0.5}{label}
 
