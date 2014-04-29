@@ -133,6 +133,21 @@ Nuevamente, y coherentemente con lo mostrado en los gr\'aficos anteriores, nos e
 \ponerGrafico{graficos/recursiva_entropia_rcv.png}{Fuente de informaci\'on: IPs que reciben}{0.5}{label}
 \ponerGrafico{graficos/recursiva_grafo.png}{Red Ethernet de Recursiva}{0.5}{label}
 
+Observamos en el cálculo de la entropía que existen cinco direcciones ip tales que la cantidad de información es notablemente menor a la del resto de las direcciones. Estas son las direcciones 192.168.1.254, 192.168.1.182, 192.168.1.102, 192.168.1.134 y 192.168.1.141:
+
+\begin{enumerate}
+\item[A] - 192.168.1.141: Todos los paquetes ARP con valor who-has que tienen a esta dirección como fuente también la tienen como destino. Esta dirección no establece comunicación alguna con otras direcciones. Es improbable por lo tanto que este sea el router de nuestra red LAN.
+
+\item[B] - 192.168.1.102 y 192.168.1.134: Ambas direcciones han enviado paquetes a cuatro direcciones entre ambas (192.168.1.135, 192.168.1.130, 192.168.1.203 y 192.168.1.5). Sin embargo, ninguna de las direcciones a las que les enviaron paquetes ha respondido. De hecho, no existe ningun paquete ARP con valor who-has que tenga como destino a ninguna de estas dos direcciones. Es por eso principalmente que es poco probable que cualquiera de estas direcciones sea la dirección de router.
+
+\item[C] - 192.168.1.254 y 192.168.1.102: Observamos que la dirección 192.168.1.254 es la que tiene un mayor grado de interacción con la mayor cantidad de nodos. Por otro lado, la dirección con sufijo 254 es comunmente utilizada para identificar univocamente al router. Hay además otro argumento además, que justifica esta impresión: la dirección MAC asociada a la IP 192.168.1.254 ha enviado también, algunos paquetes ARP cuya dirección fuente se corresponde con 200.61.187.9, una dirección que es externa a la red LAN, que tiene como dirección destino a la IP 192.168.1.145 (que sí es una dirección perteneciente a la LAN). Este fenómeno se corresponde con una comunicación con una dirección externa a la LAN como puede ser, por ejemplo, alguna página web, que se routea desde la dirección MAC del router. Finalmente, comprobamos nuestra teoría mediante el comando ipconfig en la consola de Windows, cmd.
+
+\end{enumerate}
+
+Por su parte observamos que la dirección 192.168.1.182 no envía ningún paquete con destino a 192.168.1.254. Sin embargo, sí sucede lo contrario. A su vez, observamos que la dirección 192.168.1.182 envía paquetes a varias direcciones IP que luego envían paquetes a 192.168.1.254 sin haber recibido nunca un paquete ARP de esta dirección con valor who-has
+
+
+    
 \subsection{Red Ethernet Organismo (ORSNA)}
 \ponerGrafico{graficos/orsna_entropia.png}{Fuente de informaci\'on: IPs que env\'ian}{0.5}{label}
 \ponerGrafico{graficos/orsna_entropia_rcv.png}{Fuente de informaci\'on: IPs que reciben}{0.5}{orsna_entr_rcv}
@@ -167,6 +182,31 @@ Pudimos ver, que si bien el Router participa en una cantidad importante de los p
 Sin lugar a dudas, la gran variedad de redes, las distintas formas de configurarlas y la diversidad de Hosts que podemos encontrarnos, nos muestran que no existe una regla que nos diga, que rol cumple cada nodo. En las casas particulares y lugares p\'ublicos es efectivo usar la fuente de informaci\'on que usa el evento de ip origen, porque hay un solo gateway y los dem\'as hosts son en general terminales de usuarios normales como pc, notebooks o celulares que no interfieren en el an\'alisis. A diferencia de una red en un lugar de trabajo, donde podemos encontrar distintos routers, y terminales de administradores que pueden estar haciendo mantenimiento o su propio estudio de la red, generando tr\'afico ARP para encontrar hosts ca\'idos, por ejemplo, y que influye en los resultados finales, como ya vimos. 
 
 A pesar de esto, lo que si podemos encontrar es una generalidad, y ver que nuestra hip\'otesis primigenia de que el Router sea quien m\'as utiliza el protocolo ARP es acertada, y en la mayor\'ia de los escenarios es efectivo.
+\section{Ejecuci\'on del programa} 
 
+Para poder reproducir los an\'alisis basta con ejecutar el comando:
+
+\texttt{escucha\_pasiva.py} [\textit{file/lan}] [\textit{archivo\_entrada/archivo\_salida}] [\textit{tiempo\_sniff}]
+
+\begin{itemize}
+\item[] [\textit{file/lan}] - la opci\'on \textit{file} permite levantar los paquetes de un archivo. El nombre del archivo va en el segundo par\'ametro. En cambio, la opci\'on \textit{lan} permite leer los paquetes capturados de la placa de red. Son necesarios los otros dos par\'ametros.
+
+\item[] [\textit{archivo\_entrada/archivo\_salida}] - dependiendo de la primera opci\'on, esto es de donde se levantan los paquetes, o donde se guardan.
+
+\item[] [\textit{tiempo\_sniff}] - si la primera opci\'on es \textit{file}, este es el tiempo en minutos de escucha de la red. 
+
+Esto genera 4 archivos: 
+
+\begin{enumerate}
+ \item \textit{lan}\_all.txt: contiene en crudo toda la secuencia de paquetes captados
+ \item \textit{lan}\_src.txt: contiene dos columnas, una de la ip que manda y otra de la cantidad de paquetes enviados 
+ \item \textit{lan}\_dst.txt: lo mismo que el anterior pero de las ips que recibieron. 
+ \item \textit{lan}\_com.txt: contiene tres columnas, una de la ip que manda, otra de la que recibe y la ultima de la cantidad de paquetes de esta conversaci\'on. 
+\end{enumerate}
+
+Y por \'ultimo para graficar es necesaria la librer\'ia \texttt{networkx} y se puede ejecutar el script \texttt{graficar.py} pas\'andole como par\'ametro el archivo *\_all.txt generado con el programa anterior. Una vez ejecutado, se generar\'an 3 gr\'aficos, uno del grafo, y el de las dos entrop\'ias e IPs.
+
+
+\end{itemize}
 
 \end{document}
