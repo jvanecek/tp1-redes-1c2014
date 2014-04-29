@@ -132,7 +132,14 @@ Nuevamente, y coherentemente con lo mostrado en los gr\'aficos anteriores, nos e
 \subsection{Red Ethernet Organismo (ORSNA)}
 \ponerGrafico{graficos/orsna_entropia.png}{Fuente de informaci\'on: IPs que env\'ian}{0.5}{label}
 \ponerGrafico{graficos/orsna_entropia_rcv.png}{Fuente de informaci\'on: IPs que reciben}{0.5}{label}
+
+A diferencia de las LAN anteriores, podemos notar que no est\'a tan expl\'icita la IP del router. Adem\'as, hay muchas direcciones IP fuente que son distinguibles. Rastreando a d\'onde pertenece cada dirección, encontramos que la IP 10.0.21.19 pertenec\'ia a una impresora que dej\'o de funcionar y fue sacada del organismo. Pero no fue sacada de la configuraci\'on de dispositivos de algunas computadoras, que son aquellas que realizan llamados who-has constantemente a esa direcci\'on buscando la impresora perdida. Esto puede constatarse dado que en el gr\'afico de las ips destino, la direcci\'on 10.0.21.19 est\'a por debajo de la entrop\'ia, es decir,es una direcci\'on distinguible.
+Adem\'as, tampoco se pudo rastrear a qu\'e hab\'ia pertenecido la direcci\'on 10.0.21.20, otra direcci\'on distinguible en los destinos, dado que actualmente no est\'a asignada a ning\'un hardware. Esta direcci\'on fue requerida constantemente por la IP 10.0.20.57 (al rededor de mil veces en 30 minutos). Esto es lo que hace que sea una fuente distinguida, pero no podemos deducir por qu\'e, dado que nos falta informaci\'on.
+Con todos los datos sucios debido a los inconvenientes mencionados anteriormente, no se puede deducir f\'acilmente  cu\'al es el router de la red. Lo suponemos por la direcci\'on IP terminada en .1 (10.0.21.1), y efectivamente, al rastrear la direcci\'on, result\'o ser ese el router.
+
 \ponerGrafico{graficos/orsna_grafo.png}{Red Ethernet de ORSNA}{0.5}{label}
+
+En este gr\'afico podemos ver nuevamente lo que mencion\'abamos antes. Las direcci\'on IP 10.0.21.57 es la que m\'as paquetes who-has mand\'o a la IP fantasma, y luego todas se mantienen m\'as o menos igual debido que todas mandaron paquetes a la IP 10.0.21.19 que pertenec\'ia a la impresora.
 
 \subsection{Red WiFi local comercial (McDonalds)}
 \ponerGrafico{graficos/mcdonalds_entropia.png}{Fuente de informaci\'on: IPs que env\'ian}{0.5}{label}
