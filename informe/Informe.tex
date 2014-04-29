@@ -83,8 +83,8 @@ El paquete est\'a compuesto, entre otras cosas, por la direcci\'on IP y MAC orig
 Como m\'etodo para identificar los routers en la red analizamos tres fuentes de informaci\'on en 5 redes diferentes (dos dom\'esticas, una empresarial, una de un organismo, y una p\'ublica). Las fuentes que usamos fueron: 
 
 \begin{enumerate}
- \item {\it IP origen}; evento: IP {\it X} manda un paquete {\it who-has}.
- \item {\it IP destino}; evento: IP {\it X} recibe un paquete {\it who-has}.
+ \item {\it IP origen}; evento: IP {\it X} origen de un paquete {\it who-has}.
+ \item {\it IP destino}; evento: IP {\it X} destino de un paquete {\it who-has}.
  \item {\it IP origen - IP destino}; evento: IP {\it X} manda un paquete who-has a {\it y}.
 \end{enumerate}
 
@@ -131,11 +131,13 @@ Nuevamente, y coherentemente con lo mostrado en los gr\'aficos anteriores, nos e
 
 \subsection{Red Ethernet Organismo (ORSNA)}
 \ponerGrafico{graficos/orsna_entropia.png}{Fuente de informaci\'on: IPs que env\'ian}{0.5}{label}
-\ponerGrafico{graficos/orsna_entropia_rcv.png}{Fuente de informaci\'on: IPs que reciben}{0.5}{label}
+\ponerGrafico{graficos/orsna_entropia_rcv.png}{Fuente de informaci\'on: IPs que reciben}{0.5}{orsna_entr_rcv}
 
-A diferencia de las LAN anteriores, podemos notar que no est\'a tan expl\'icita la IP del router. Adem\'as, hay muchas direcciones IP fuente que son distinguibles. Rastreando a d\'onde pertenece cada dirección, encontramos que la IP 10.0.21.19 pertenec\'ia a una impresora que dej\'o de funcionar y fue sacada del organismo. Pero no fue sacada de la configuraci\'on de dispositivos de algunas computadoras, que son aquellas que realizan llamados who-has constantemente a esa direcci\'on buscando la impresora perdida. Esto puede constatarse dado que en el gr\'afico de las ips destino, la direcci\'on 10.0.21.19 est\'a por debajo de la entrop\'ia, es decir,es una direcci\'on distinguible.
+A diferencia de las LAN anteriores, podemos notar que no est\'a tan expl\'icita la IP del router. Con ambas fuentes de informaci\'on encontramos distintos hosts distinguibles. Rastreando a d\'onde pertenece cada dirección, encontramos que la IP 10.0.21.19 pertenec\'ia a una impresora que dej\'o de funcionar y fue sacada del organismo, pero no fue sacada de la configuraci\'on de dispositivos de algunas computadoras, que son aquellas que realizan llamados who-has constantemente a esa direcci\'on buscando la impresora perdida. Es por ello que esta direcci\'on est\'a por debajo de la entrop\'ia en el gr\'afico \ref{fig:orsna_entr_rcv}, debido a la cantidad de informaci\'on que lleva este evento. 
+
 Adem\'as, tampoco se pudo rastrear a qu\'e hab\'ia pertenecido la direcci\'on 10.0.21.20, otra direcci\'on distinguible en los destinos, dado que actualmente no est\'a asignada a ning\'un hardware. Esta direcci\'on fue requerida constantemente por la IP 10.0.20.57 (al rededor de mil veces en 30 minutos). Esto es lo que hace que sea una fuente distinguida, pero no podemos deducir por qu\'e, dado que nos falta informaci\'on.
-Con todos los datos sucios debido a los inconvenientes mencionados anteriormente, no se puede deducir f\'acilmente  cu\'al es el router de la red. Lo suponemos por la direcci\'on IP terminada en .1 (10.0.21.1), y efectivamente, al rastrear la direcci\'on, result\'o ser ese el router.
+
+Con todos los datos sucios debido a los inconvenientes mencionados anteriormente, no se puede deducir f\'acilmente  cu\'al es el router de la red, aunque rastre\'andolo pudimos comprobar que este se encuentra en la direcci\'on $10.0.21.1$.
 
 \ponerGrafico{graficos/orsna_grafo.png}{Red Ethernet de ORSNA}{0.5}{label}
 
@@ -144,7 +146,11 @@ En este gr\'afico podemos ver nuevamente lo que mencion\'abamos antes. Las direc
 \subsection{Red WiFi local comercial (McDonalds)}
 \ponerGrafico{graficos/mcdonalds_entropia.png}{Fuente de informaci\'on: IPs que env\'ian}{0.5}{label}
 \ponerGrafico{graficos/mcdonalds_entropia_rcv.png}{Fuente de informaci\'on: IPs que reciben}{0.5}{label}
+
+Por \'ultimo, pusimos a correr nuestro programa en la red WiFi del local comercial McDondalds y al analizarlo se ve claramente un solo nodo distinguido al que podemos asumir sin dudar como el router. En el lapso de 40 min el host $172.17.58.1$ mando 1372 ARP requests en contraste con los otros hosts que mandaron menos de 38 en total.  
+
 \ponerGrafico{graficos/mcdonalds_grafo.png}{Red WiFi de McDonalds}{0.5}{label}
+
 \section{Conclusiones}
 
 \end{document}

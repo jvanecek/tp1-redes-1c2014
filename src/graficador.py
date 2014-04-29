@@ -39,9 +39,9 @@ class graficador:
 
 		graphviz_prog = ['twopi', 'gvcolor', 'wc', 'ccomps', 'tred', 'sccmap', 'fdp', 'circo', 'neato', 'acyclic', 'nop', 'gvpr', 'dot', 'sfdp']
 		# grafico
-		pos=nx.spring_layout(g,iterations=100)
+		#pos=nx.spring_layout(g,iterations=100)
 		#pos = nx.shell_layout(g)
-		#pos = nx.graphviz_layout(g,prog=graphviz_prog[0],args='-Goverlap=false')
+		pos = nx.graphviz_layout(g,prog='twopi',args='')
 		nx.draw(g,pos,
 			node_size=node_size,
 			node_color=node_color,
